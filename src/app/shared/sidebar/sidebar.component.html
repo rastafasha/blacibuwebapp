@@ -1,0 +1,60 @@
+<aside class="left-sidebar ">
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav" *ngIf="identity && identity.name">
+                <h2 class="hide-menu">{{'Bienvenido'|translate}}</h2>
+                <div class="imgpersona hide-menu">
+                    <h6>{{ identity.name + ' ' + identity.surname}}</h6>
+                </div>
+                <li class="nav-devider hide-menu"></li>
+                <li>
+                    <a routerLink='./home'> <i class="mdi mdi-bookmark"></i><span class="hide-menu"> {{'Inicio'|translate}} </span> </a>
+                </li>
+                <!--li *ngIf="identity && identity.tiporegistro_id == 1">
+                    <a routerLink='./certificacion' routerLinkActive="active"> <i class="mdi mdi-map"></i><span class="hide-menu"> {{'Certificación'|translate}} </span> </a>
+                </li-->
+                <!--li *ngIf="identity && identity.tiporegistro_id == 2">
+                    <a routerLink='./recertificacion' routerLinkActive="active"> <i class="mdi mdi-bookmark"></i><span class="hide-menu"> {{'Recertificación'|translate}} </span> </a>
+                </li-->
+
+                <li>
+                    <a routerLink='./reglamentos' routerLinkActive="active"> <i class="mdi mdi-bookmark"></i><span class="hide-menu"> {{'Reglamentos'|translate}} </span> </a>
+                </li>
+                <li class="nav-devider hide-menu"></li>
+
+
+            </ul>
+
+            <ul id="sidebarnav" *ngIf="identityAdmin && identityAdmin.name">
+                <h2 class="hide-menu">{{'Bienvenido'|translate}}</h2>
+                <div class="imgpersona hide-menu">
+                    <h6>{{ identityAdmin.name + ' ' + identityAdmin.surname}}</h6>
+                </div>
+                <li class="nav-devider hide-menu"></li>
+                <!--admin-->
+                <div *ngIf="identityAdmin && identityAdmin.tiporegistro_id == 3">
+                    <li>
+                        <a routerLink='./admin' routerLinkActive="active"> <i class="mdi mdi-bookmark"></i><span class="hide-menu"> {{'Admin'|translate}} </span> </a>
+                    </li>
+
+                    <li>
+                        <a routerLink='/usuarios' routerLinkActive="active"> <i class="mdi mdi-bookmark"></i><span class="hide-menu"> {{'Usuarios'|translate}} </span> </a>
+                    </li>
+                    <li>
+                        <a routerLink='/usuarios-aprobados' routerLinkActive="active"> <i class="mdi mdi-bookmark"></i><span class="hide-menu"> {{'Usuarios Aprobados'|translate}}</span> </a>
+                    </li>
+                    <li>
+                        <a routerLink='/usuarios-observacion' routerLinkActive="active"> <i class="mdi mdi-bookmark"></i><span class="hide-menu"> {{'Usuarios Observación'|translate}}</span> </a>
+                    </li>
+                </div>
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <footer class="footer footer-hide">
+        <small>BLACIBU © 2021 Desarrollado por: <a href="https://malcolmcordova.com" target="_blank">Malcolm Cordova Studio Design</a></small>
+    </footer>
+    <!-- End Sidebar scroll-->
+</aside>

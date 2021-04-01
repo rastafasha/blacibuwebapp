@@ -1,0 +1,339 @@
+<div class="row">
+    <div class="col-12 animated fadeInUp">
+        <div class="card card-padd">
+            <div class="card-body blog-form">
+                <form [formGroup]="conferenciaForm" (ngSubmit)="onSubmit(conferenciaForm)" class="form-horizontal form-material">
+                    <div class="row">
+
+                        <h2 class="col-12"> {{'Conferencias y trabajos' | translate}}</h2><br><br>
+                        <!-- p1-->
+                        <div class="row card-padd">
+                            <h4 class="col-12">{{'Conferencias presentadas con aval académico de Alacibu'|translate}} <i class="fa fa-info" data-toggle="tooltip" data-placement="top" data-original-title="Ordenados por fecha comenzando por la más reciente."></i></h4>
+
+                            <div class="clear"></div><br><br>
+                            <div class="row">
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label> {{'Título de la conferencia'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="conf_con_aval_academico_titulo">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Evento en el que fue presentado'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="conf_con_aval_academico_evento">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <img src="assets/images/pdf-icon.png" alt="">
+                                    <angular-file-uploader class="form-control" [config]="conferenciaConfig" (ApiResponse)="fileUpload($event)">
+                                    </angular-file-uploader>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <a class="btn btn-outline-success" (click)="agregarPregunta()">Agregar Pregunta</a>
+                            </div>
+                            <div [formGroup]="conferenciaForm">
+                                <div formArrayName="preguntas">
+                                    <div *ngFor="let pregunta of preguntas.controls; let i = index">
+                                        <div [formGroupName]="i">
+                                            <div class="form-group row">
+
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'conf_con_aval_academico_titulo' + i"> {{'Título de la conferencia'|translate}}</label>
+                                                    <input type="text" [attr.id]="'conf_con_aval_academico_titulo' + i" class="form-control" formControlName="conf_con_aval_academico_titulo">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'conf_con_aval_academico_evento' + i"> {{'Evento en el que fue presentado'|translate}}</label>
+                                                    <input type="text" [attr.id]="'conf_con_aval_academico_evento' + i" class="form-control" formControlName="conf_con_aval_academico_evento">
+                                                </div>
+                                                <div class="form-group  col-xs-12 col-sm-4 camp">
+                                                    <img src="assets/images/pdf-icon.png" alt="" [attr.for]="'conf_con_aval_academico_pdf' + i">
+                                                    <angular-file-uploader [attr.id]="'conf_con_aval_academico_pdf' + i" class="form-control" [config]="conferenciaConfig" (ApiResponse)="fileUpload($event)">
+                                                    </angular-file-uploader>
+
+                                                </div>
+
+                                                <div class="clear"></div>
+                                                <div class="col-md-2">
+                                                    <button class="btn btn-danger" (click)="removerPregunta(i)">Remover</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- p2-->
+                        <div class="row card-padd">
+                            <h4 class="col-12">{{'Conferencias presentadas sin aval académico de Alacibu'|translate}} <i class="fa fa-info" data-toggle="tooltip" data-placement="top" data-original-title="Ordenados por fecha comenzando por la más reciente."></i></h4>
+
+                            <div class="clear"></div><br><br>
+                            <div class="row">
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label> {{'Título de la conferencia'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="conf_sin_aval_academico_titulo">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Evento en el que fue presentado'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="conf_sin_aval_academico_evento">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <img src="assets/images/pdf-icon.png" alt="">
+                                    <angular-file-uploader class="form-control" [config]="conferenciaConfig1" (ApiResponse)="fileUpload($event)">
+                                    </angular-file-uploader>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-outline-success" (click)="agregarPregunta2()">Agregar Pregunta</a>
+                            </div>
+                            <div formArrayName="preguntas2">
+                                <div *ngFor="let pregunta2 of preguntas2.controls; let i = index">
+                                    <div [formGroupName]="i">
+                                        <div class="form-group row">
+
+                                            <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                <label [attr.for]="'conf_sin_aval_academico_titulo' + i"> {{'Título de la conferencia'|translate}}</label>
+                                                <input type="text" [attr.id]="'conf_sin_aval_academico_titulo' + i" class="form-control" formControlName="conf_sin_aval_academico_titulo">
+                                            </div>
+                                            <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                <label [attr.for]="'conf_sin_aval_academico_evento' + i"> {{'Evento en el que fue presentado'|translate}}</label>
+                                                <input type="text" [attr.id]="'conf_sin_aval_academico_evento' + i" class="form-control" formControlName="conf_sin_aval_academico_evento">
+                                            </div>
+                                            <div class="form-group  col-xs-12 col-sm-4 camp">
+                                                <img src="assets/images/pdf-icon.png" alt="" [attr.for]="'conf_sin_aval_academico_pdf' + i">
+                                                <angular-file-uploader [attr.id]="'conf_sin_aval_academico_pdf' + i" class="form-control" [config]="conferenciaConfig1" (ApiResponse)="fileUpload($event)">
+                                                </angular-file-uploader>
+
+                                            </div>
+
+                                            <div class="clear"></div>
+                                            <div class="col-md-2">
+                                                <button class="btn btn-danger" (click)="removerPregunta2(i)">Remover</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- p3-->
+                        <div class="row card-padd">
+                            <h4 class="col-12">{{'Trabajos presentados con aval académico de Alacibu'|translate}} <i class="fa fa-info" data-toggle="tooltip" data-placement="top" data-original-title="Ordenados por fecha comenzando por la más reciente."></i></h4>
+
+                            <div class="clear"></div><br><br>
+                            <div class="row">
+                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                    <label> {{'Título del trabajo'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="trab_pres_con_aval_titulo">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                    <label>{{'Evento en el que fue presentado'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="trab_pres_con_aval_evento">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                    <label>{{'Modalidad (presentación oral o poster)'|translate}}</label>
+                                    <select class="form-control form-control-line" formControlName="trab_pres_con_aval_modalidad">
+                                      <option value="">{{'Seleccione'|translate}}</option>
+                                          <option value="oral">{{'Oral'|translate}}</option>
+                                          <option value="poster">{{'Poster'|translate}}</option>
+                                      </select>
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                    <img src="assets/images/pdf-icon.png" alt="">
+                                    <angular-file-uploader class="form-control" [config]="conferenciaConfig2" (ApiResponse)="fileUpload($event)">
+                                    </angular-file-uploader>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-outline-success" (click)="agregarPregunta3()">Agregar Pregunta</a>
+                            </div>
+                            <div formArrayName="preguntas3">
+                                <div *ngFor="let pregunta3 of preguntas3.controls; let i = index">
+                                    <div [formGroupName]="i">
+                                        <div class="form-group row">
+
+                                            <div class="form-group camp col-xs-12 col-sm-6 ">
+                                                <label [attr.for]="'trab_pres_con_aval_titulo' + i"> {{'Título del trabajo'|translate}}</label>
+                                                <input type="text" [attr.id]="'trab_pres_con_aval_titulo' + i" class="form-control" formControlName="trab_pres_con_aval_titulo">
+                                            </div>
+                                            <div class="form-group camp col-xs-12 col-sm-6 ">
+                                                <label [attr.for]="'trab_pres_con_aval_evento' + i"> {{'Evento en el que fue presentado'|translate}}</label>
+                                                <input type="text" [attr.id]="'trab_pres_con_aval_evento' + i" class="form-control" formControlName="trab_pres_con_aval_evento">
+                                            </div>
+                                            <div class="form-group camp col-xs-12 col-sm-6 ">
+                                                <label [attr.for]="'trab_pres_con_aval_modalidad' + i">{{'Modalidad (presentación oral o poster)'|translate}}</label>
+                                                <select [attr.id]="'trab_pres_con_aval_modalidad' + i" class="form-control form-control-line" formControlName="trab_pres_con_aval_modalidad">
+                                                <option value="">{{'Seleccione'|translate}}</option>
+                                                <option value="oral">{{'Oral'|translate}}</option>
+                                                <option value="poster">{{'Poster'|translate}}</option>
+                                              </select>
+                                            </div>
+                                            <div class="form-group  col-xs-12 col-sm-6 camp">
+                                                <img src="assets/images/pdf-icon.png" alt="" [attr.for]="'trab_pres_con_aval_pdf' + i">
+                                                <angular-file-uploader [attr.id]="'trab_pres_con_aval_pdf' + i" class="form-control" [config]="conferenciaConfig2" (ApiResponse)="fileUpload($event)">
+                                                </angular-file-uploader>
+
+                                            </div>
+
+                                            <div class="clear"></div>
+                                            <div class="col-md-2">
+                                                <button class="btn btn-danger" (click)="removerPregunta3(i)">Remover</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- p3-->
+                        <div class="row card-padd">
+                            <h4 class="col-12">{{'Trabajos presentados sin aval académico de Alacibu'|translate}} <i class="fa fa-info" data-toggle="tooltip" data-placement="top" data-original-title="Ordenados por fecha comenzando por la más reciente."></i></h4>
+
+                            <div class="clear"></div><br><br>
+                            <div class="row">
+                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                    <label> {{'Título del trabajo'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="trab_pres_sin_aval_titulo">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                    <label>{{'Evento en el que fue presentado'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="trab_pres_sin_aval_evento">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                    <label>{{'Modalidad (presentación oral o poster)'|translate}}</label>
+                                    <select class="form-control form-control-line" formControlName="trab_pres_sin_aval_modalidad">
+                                    <option value="">{{'Seleccione'|translate}}</option>
+                                        <option value="oral">{{'Oral'|translate}}</option>
+                                        <option value="poster">{{'Poster'|translate}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                    <img src="assets/images/pdf-icon.png" alt="">
+                                    <angular-file-uploader class="form-control" [config]="conferenciaConfig3" (ApiResponse)="fileUpload($event)">
+                                    </angular-file-uploader>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-outline-success" (click)="agregarPregunta4()">Agregar Pregunta</a>
+                            </div>
+                            <div formArrayName="preguntas4">
+                                <div *ngFor="let pregunta4 of preguntas4.controls; let i = index">
+                                    <div [formGroupName]="i">
+                                        <div class="form-group row">
+
+                                            <div class="form-group camp col-xs-12 col-sm-6 ">
+                                                <label [attr.for]="'trab_pres_sin_aval_titulo' + i"> {{'Título del trabajo'|translate}}</label>
+                                                <input type="text" [attr.id]="'trab_pres_sin_aval_titulo' + i" class="form-control" formControlName="trab_pres_sin_aval_titulo">
+                                            </div>
+                                            <div class="form-group camp col-xs-12 col-sm-6 ">
+                                                <label [attr.for]="'trab_pres_sin_aval_evento' + i"> {{'Evento en el que fue presentado'|translate}}</label>
+                                                <input type="text" [attr.id]="'trab_pres_sin_aval_evento' + i" class="form-control" formControlName="trab_pres_sin_aval_evento">
+                                            </div>
+                                            <div class="form-group camp col-xs-12 col-sm-6 ">
+                                                <label [attr.for]="'trab_pres_sin_aval_modalidad' + i">{{'Modalidad (presentación oral o poster)'|translate}}</label>
+                                                <select [attr.id]="'trab_pres_sin_aval_modalidad' + i" class="form-control form-control-line" formControlName="trab_pres_sin_aval_modalidad">
+                                              <option value="">{{'Seleccione'|translate}}</option>
+                                              <option value="oral">{{'Oral'|translate}}</option>
+                                              <option value="poster">{{'Poster'|translate}}</option>
+                                            </select>
+                                            </div>
+                                            <div class="form-group  col-xs-12 col-sm-6 camp">
+                                                <img src="assets/images/pdf-icon.png" alt="" [attr.for]="'trab_pres_sin_aval_pdf' + i">
+                                                <angular-file-uploader [attr.id]="'trab_pres_sin_aval_pdf' + i" class="form-control" [config]="conferenciaConfig3" (ApiResponse)="fileUpload($event)">
+                                                </angular-file-uploader>
+
+                                            </div>
+
+                                            <div class="clear"></div>
+                                            <div class="col-md-2">
+                                                <button class="btn btn-danger" (click)="removerPregunta4(i)">Remover</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- p3-->
+                        <div class="row card-padd">
+                            <h4 class="col-12">{{'Trabajos publicados'|translate}} <i class="fa fa-info" data-toggle="tooltip" data-placement="top" data-original-title="Ordenados por fecha comenzando por la más reciente."></i></h4>
+
+                            <div class="clear"></div><br><br>
+                            <div class="row">
+                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                    <label> {{'Nombre del trabajo'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="trab_publicados_nombre">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                    <label>{{'Año de publicación'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="trab_publicados_ano">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                    <label>{{'Revista científica'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="trab_publicados_revisa">
+                                </div>
+
+                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                    <img src="assets/images/pdf-icon.png" alt="">
+                                    <angular-file-uploader class="form-control" [config]="conferenciaConfig4" (ApiResponse)="fileUpload($event)">
+                                    </angular-file-uploader>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-outline-success" (click)="agregarPregunta5()">Agregar Pregunta</a>
+                            </div>
+                            <div formArrayName="preguntas5">
+                                <div *ngFor="let pregunta5 of preguntas5.controls; let i = index">
+                                    <div [formGroupName]="i">
+                                        <div class="form-group row">
+
+                                            <div class="form-group camp col-xs-12 col-sm-6 ">
+                                                <label [attr.for]="'trab_publicados_nombre' + i"> {{'Título del trabajo'|translate}}</label>
+                                                <input type="text" [attr.id]="'trab_publicados_nombre' + i" class="form-control" formControlName="trab_publicados_nombre">
+                                            </div>
+                                            <div class="form-group camp col-xs-12 col-sm-6 ">
+                                                <label [attr.for]="'trab_publicados_ano' + i"> {{'Evento en el que fue presentado'|translate}}</label>
+                                                <input type="text" [attr.id]="'trab_publicados_ano' + i" class="form-control" formControlName="trab_publicados_ano">
+                                            </div>
+                                            <div class="form-group camp col-xs-12 col-sm-6 ">
+                                                <label [attr.for]="'trab_publicados_revisa' + i"> {{'Evento en el que fue presentado'|translate}}</label>
+                                                <input type="text" [attr.id]="'trab_publicados_revisa' + i" class="form-control" formControlName="trab_publicados_revisa">
+                                            </div>
+                                            <div class="form-group  col-xs-12 col-sm-6 camp">
+                                                <img src="assets/images/pdf-icon.png" alt="" [attr.for]="'trab_publicados_pdf' + i">
+                                                <angular-file-uploader [attr.id]="'trab_publicados_pdf' + i" class="form-control" [config]="conferenciaConfig" (ApiResponse)="fileUpload($event)">
+                                                </angular-file-uploader>
+
+                                            </div>
+
+                                            <div class="clear"></div>
+                                            <div class="col-md-2">
+                                                <button class="btn btn-danger" (click)="removerPregunta5(i)">Remover</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group form-row">
+                            <div class="col-12">
+                                <input type="hidden" formControlName="id">
+                                <button type="submit" [disabled]="!conferenciaForm.valid" class="btn btn-outline-success">{{'Guardar'|translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,400 @@
+<div class="row">
+    <div class="col-12 animated fadeInUp">
+        <div class="card card-padd">
+            <div class="card-body blog-form">
+                <form [formGroup]="recertificadoForm" (ngSubmit)="onSubmit(recertificadoForm)" class="form-horizontal form-material">
+                    <div class="row">
+
+                        <h2 class="col-12"> {{'Certificados'|translate}}</h2><br><br>
+
+                        <div class="row card-padd">
+                            <h4 class="col-12">{{'Certificados o diplomas de actividades académicas y/o actividades asistenciales'|translate}}</h4>
+                            <div class="clear"></div>
+                            <br><br>
+                            <br>
+                            <div class=" col-xs-12 col-sm-4 form-group camp">
+                                <label>{{'Nombre de la institución'|translate}}</label>
+                                <input type="text" formControlName="cert_act_academicas_y_asistenciales_nombre" class="form-control">
+                            </div>
+                            <div class=" col-xs-12 col-sm-4 form-group camp">
+                                <label>{{'Cargo desempeñado'|translate}} </label>
+                                <input type="text" formControlName="cert_act_academicas_y_asistenciales_cargo" class="form-control">
+                            </div>
+                            <div class=" col-xs-12 col-sm-4 form-group camp">
+                                <label> {{'Tiempo en años'|translate}}</label>
+                                <input type="text" formControlName="cert_act_academicas_y_asistenciales_cargo" class="form-control">
+                            </div>
+
+                            <div class=" col-xs-12 col-sm-6 form-group camp">
+                                <label>{{'Institución que lo avala'|translate}}</label>
+                                <input type="text" formControlName="cert_act_academicas_y_asistenciales_institucion" class="form-control">
+                            </div>
+                            <div class=" col-xs-12 col-sm-6 form-group camp">
+                                <img src="assets/images/pdf-icon.png" alt="">
+                                <angular-file-uploader class="form-control" [config]="reccertificadoConfig" (ApiResponse)="fileUpload($event)">
+                                </angular-file-uploader>
+                            </div>
+                        </div>
+
+                        <div class="clear"></div>
+                        <div class="rayita"></div>
+
+                        <!--grupo preg-->
+                        <div class="row card-padd">
+                            <h4 class="col-12">{{'Trabajos especiales de grado y artículos científicos publicados'|translate}} <i class="fa fa-info" data-toggle="tooltip" data-placement="top" data-original-title="Ordenados por fecha comenzando por la más reciente."></i></h4>
+                            <div class="clear"></div><br><br>
+                            <div class="row">
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Nombre del trabajo'|translate}} </label>
+                                    <input type="text" formControlName="trab_esp_y_art_cientificos_nombre" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Año del trabajo'|translate}} </label>
+                                    <input type="text" formControlName="trab_esp_y_art_cientificos_ano" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Revista científica indexada'|translate}} </label>
+                                    <input type="text" formControlName="trab_esp_y_art_cientificos_revista" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Institución que lo avala'|translate}}</label>
+                                    <input type="text" formControlName="trab_esp_y_art_cientificos_institucion" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'En calidad de'|translate}}</label>
+                                    <input type="text" formControlName="trab_esp_y_art_cientificos_encalidad" class="form-control">
+                                </div>
+                                <div class=" col-xs-12 col-sm-4 camp">
+                                    <img src="assets/images/pdf-icon.png" alt="">
+                                    <angular-file-uploader [config]="reccertificadoConfig" (ApiResponse)="fileUpload($event)">
+                                    </angular-file-uploader>
+
+                                    <br>
+                                    <br>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-outline-success" (click)="agregarPregunta()">Agregar Pregunta</a>
+                            </div>
+                            <div [formGroup]="recertificadoForm">
+                                <div formArrayName="preguntas">
+                                    <div *ngFor="let pregunta of preguntas.controls; let i = index">
+                                        <div [formGroupName]="i">
+                                            <div class="form-group row">
+
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'trab_esp_y_art_cientificos_nombre' + i"> {{'Nombre del trabajo'|translate}}</label>
+                                                    <input type="text" [attr.id]="'trab_esp_y_art_cientificos_nombre' + i" class="form-control" formControlName="trab_esp_y_art_cientificos_nombre">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'trab_esp_y_art_cientificos_ano' + i"> {{'Año del trabajo'|translate}}</label>
+                                                    <input type="text" [attr.id]="'trab_esp_y_art_cientificos_ano' + i" class="form-control" formControlName="trab_esp_y_art_cientificos_ano">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'trab_esp_y_art_cientificos_revista' + i"> {{'Revista científica indexada'|translate}}</label>
+                                                    <input type="text" [attr.id]="'trab_esp_y_art_cientificos_revista' + i" class="form-control" formControlName="trab_esp_y_art_cientificos_revista">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'trab_esp_y_art_cientificos_encalidad' + i"> {{'Institución que lo avala'|translate}}</label>
+                                                    <input type="text" [attr.id]="'trab_esp_y_art_cientificos_encalidad' + i" class="form-control" formControlName="trab_esp_y_art_cientificos_encalidad">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'trab_esp_y_art_cientificos_encalidad' + i"> {{'En calidad de'|translate}}</label>
+                                                    <input type="text" [attr.id]="'trab_esp_y_art_cientificos_encalidad' + i" class="form-control" formControlName="trab_esp_y_art_cientificos_encalidad">
+                                                </div>
+                                                <div class="form-group  col-xs-12 col-sm-4 camp">
+                                                    <img src="assets/images/pdf-icon.png" alt="" [attr.for]="'trab_esp_y_art_cientificos_pdf' + i">
+                                                    <angular-file-uploader [attr.id]="'trab_esp_y_art_cientificos_pdf' + i" class="form-control" [config]="reccertificadoConfig" (ApiResponse)="fileUpload($event)">
+                                                    </angular-file-uploader>
+
+                                                </div>
+
+                                                <div class="clear"></div>
+                                                <div class="col-md-2">
+                                                    <button class="btn btn-danger" (click)="removerPregunta(i)">Remover</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="clear"></div>
+                        <div class="rayita"></div>
+                        <!--grupo1 preg2 -->
+                        <div class="row card-padd">
+                            <h4 class="col-12">{{'Actividad como editor o revisor de publicaciones científicas'|translate}} <i class="fa fa-info" data-toggle="tooltip" data-placement="top" data-original-title="Ordenados por fecha comenzando por la más reciente."></i></h4>
+                            <div class="clear"></div><br><br>
+                            <div class="row">
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Nombre del trabajo'|translate}} </label>
+                                    <input type="text" formControlName="act_editor_revisor_pub_cient_nombre" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Año del trabajo'|translate}} </label>
+                                    <input type="text" formControlName="act_editor_revisor_pub_cient_ano" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Revista científica indexada'|translate}} </label>
+                                    <input type="text" formControlName="act_editor_revisor_pub_cient_revista" class="form-control">
+                                </div>
+                                <div class=" col-xs-12 col-sm-4 camp">
+                                    <img src="assets/images/pdf-icon.png" alt="">
+                                    <angular-file-uploader [config]="reccertificadoConfig" (ApiResponse)="fileUpload($event)">
+                                    </angular-file-uploader>
+
+                                    <br>
+                                    <br>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-outline-success" (click)="agregarPregunta2()">Agregar Pregunta</a>
+                            </div>
+                            <div [formGroup]="recertificadoForm">
+                                <div formArrayName="preguntas2">
+                                    <div *ngFor="let pregunta2 of preguntas2.controls; let i = index">
+                                        <div [formGroupName]="i">
+                                            <div class="form-group row">
+
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'act_editor_revisor_pub_cient_nombre' + i"> {{'Nombre del trabajo'|translate}}</label>
+                                                    <input type="text" [attr.id]="'act_editor_revisor_pub_cient_nombre' + i" class="form-control">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'act_editor_revisor_pub_cient_ano' + i"> {{'Año del trabajo'|translate}}</label>
+                                                    <input type="text" [attr.id]="'act_editor_revisor_pub_cient_ano' + i" class="form-control">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'act_editor_revisor_pub_cient_revista' + i"> {{'Revista científica indexada'|translate}}</label>
+                                                    <input type="text" [attr.id]="'act_editor_revisor_pub_cient_revista' + i" class="form-control">
+                                                </div>
+                                                <div class="form-group  col-xs-12 col-sm-4 camp">
+                                                    <img src="assets/images/pdf-icon.png" alt="" [attr.for]="'act_editor_revisor_pub_cient_pdf' + i">
+                                                    <angular-file-uploader [attr.id]="'act_editor_revisor_pub_cient_pdf' + i" class="form-control" [config]="reccertificadoConfig" (ApiResponse)="fileUpload($event)">
+                                                    </angular-file-uploader>
+
+                                                </div>
+
+                                                <div class="clear"></div>
+                                                <div class="col-md-2">
+                                                    <button class="btn btn-danger" (click)="removerPregunta2(i)">Remover</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="clear"></div>
+                        <div class="rayita"></div>
+                        <!--grupo2 preg3-->
+                        <div class="row card-padd">
+                            <h4 class="col-12">{{'Certificados de asistencia a simposium, cursos o congresos de la especialidad'|translate}}</h4>
+                            <div class="clear"></div><br><br>
+                            <div class="row">
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Nombre del evento'|translate}} </label>
+                                    <input type="text" formControlName="cert_asist_simposio_de_especialidad_nombre" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Modalidad'|translate}} </label>
+                                    <input type="text" formControlName="cert_asist_simposio_de_especialidad_modalidad" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Año'|translate}} </label>
+                                    <input type="text" formControlName="cert_asist_simposio_de_especialidad_ano" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Institucion que lo avala'|translate}} </label>
+                                    <input type="text" formControlName="cert_asist_simposio_de_especialidad_institucion" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Horas crédito'|translate}} </label>
+                                    <input type="text" formControlName="cert_asist_simposio_de_especialidad_horas" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'En calidad de'|translate}} </label>
+                                    <input type="text" formControlName="cert_asist_simposio_de_especialidad_encalidade" class="form-control">
+                                </div>
+                                <div class=" col-xs-12 col-sm-4 camp">
+                                    <img src="./assets/images/pdf-icon.png" alt=" ">
+                                    <angular-file-uploader [config]="reccertificadoConfig" (ApiResponse)="fileUpload($event)">
+                                    </angular-file-uploader>
+
+                                    <br>
+                                    <br>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-outline-success" (click)="agregarPregunta3()">Agregar Pregunta</a>
+                            </div>
+                            <div [formGroup]="recertificadoForm">
+                                <div formArrayName="preguntas3">
+                                    <div *ngFor="let pregunta3 of preguntas3.controls; let i = index">
+                                        <div [formGroupName]="i">
+                                            <div class="form-group row">
+
+                                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                                    <label [attr.for]="'cert_asist_simposio_de_especialidad_nombre' + i"> {{'Nombre del evento'|translate}}</label>
+                                                    <input type="text" [attr.id]="'cert_asist_simposio_de_especialidad_nombre' + i" class="form-control" formControlName="cert_asist_simposio_de_especialidad_nombre">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                                    <label [attr.for]="'cert_asist_simposio_no_especialidad_modalidad' + i"> {{'Modalidad'|translate}}</label>
+                                                    <input type="text" [attr.id]="'cert_asist_simposio_no_especialidad_modalidad' + i" class="form-control" formControlName="cert_asist_simposio_no_especialidad_modalidad">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                                    <label [attr.for]="'cert_asist_simposio_no_especialidad_ano' + i"> {{'Año'|translate}}</label>
+                                                    <input type="text" [attr.id]="'cert_asist_simposio_no_especialidad_ano' + i" class="form-control" formControlName="cert_asist_simposio_no_especialidad_ano">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                                    <label [attr.for]="'cert_asist_simposio_no_especialidad_institucion' + i"> {{'Institución que lo avala'|translate}}</label>
+                                                    <input type="text" [attr.id]="'cert_asist_simposio_de_especialidad_institucion' + i" class="form-control" formControlName="cert_asist_simposio_no_especialidad_institucion">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                                    <label [attr.for]="'cert_asist_simposio_de_especialidad_horas' + i"> {{'Horas crédito'|translate}}</label>
+                                                    <input type="text" [attr.id]="'cert_asist_simposio_de_especialidad_horas' + i" class="form-control" formControlName="cert_asist_simposio_de_especialidad_horas">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                                    <label [attr.for]="'cert_asist_simposio_de_especialidad_encalidade' + i"> {{'En calidad de'|translate}}</label>
+                                                    <input type="text" [attr.id]="'cert_asist_simposio_de_especialidad_encalidade' + i" class="form-control" formControlName="cert_asist_simposio_de_especialidad_encalidade">
+                                                </div>
+                                                <div class="form-group  col-xs-12 col-sm-6 camp">
+                                                    <img src="assets/images/pdf-icon.png" alt="" [attr.for]="'cert_asist_simposio_de_especialidad_pdf' + i">
+                                                    <angular-file-uploader [attr.id]="'cert_asist_simposio_de_especialidad_pdf' + i" class="form-control" formControlName="cert_asist_simposio_de_especialidad_pdf" [config]="reccertificadoConfig" (ApiResponse)="fileUpload($event)">
+                                                    </angular-file-uploader>
+
+                                                </div>
+
+                                                <div class="clear"></div>
+                                                <div class="col-md-2">
+                                                    <button class="btn btn-danger" (click)="removerPregunta3(i)">Remover</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="clear"></div>
+                        <div class="rayita"></div>
+                        <!--grupo4 preg4-->
+                        <div class="row card-padd">
+                            <h4 class="col-12">{{'Certificados de asistencia a simposio, cursos y congresos no pertenecientes a la especialidad'|translate}}</h4>
+                            <div class="clear"></div><br><br>
+                            <div class="row">
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Nombre del evento'|translate}} </label>
+                                    <input type="text" formControlName="cert_asist_simposio_no_especialidad_nombre" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Modalidad'|translate}} </label>
+                                    <input type="text" formControlName="cert_asist_simposio_no_especialidad_modalidad" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Año'|translate}} </label>
+                                    <input type="text" formControlName="cert_asist_simposio_no_especialidad_ano" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Institucion que lo avala'|translate}} </label>
+                                    <input type="text" formControlName="cert_asist_simposio_no_especialidad_institucion" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Horas crédito'|translate}} </label>
+                                    <input type="text" formControlName="cert_asist_simposio_no_especialidad_horas" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'En calidad de'|translate}} </label>
+                                    <input type="text" formControlName="cert_asist_simposio_no_especialidad_encalidade" class="form-control">
+                                </div>
+                                <div class=" col-xs-12 col-sm-4 camp">
+                                    <img src="./assets/images/pdf-icon.png" alt=" ">
+                                    <angular-file-uploader [config]="reccertificadoConfig" (ApiResponse)="fileUpload($event)">
+                                    </angular-file-uploader>
+
+                                    <br>
+                                    <br>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-outline-success" (click)="agregarPregunta4()">Agregar Pregunta</a>
+                            </div>
+                            <div [formGroup]="recertificadoForm">
+                                <div formArrayName="preguntas4">
+                                    <div *ngFor="let pregunta4 of preguntas4.controls; let i = index">
+                                        <div [formGroupName]="i">
+                                            <div class="form-group row">
+
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'cert_asist_simposio_no_especialidad_nombre' + i"> {{'Nombre del evento'|translate}}</label>
+                                                    <input type="text" [attr.id]="'cert_asist_simposio_no_especialidad_nombre' + i" class="form-control" formControlName="cert_asist_simposio_no_especialidad_nombre">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'cert_asist_simposio_no_especialidad_modalidad' + i"> {{'Modalidad'|translate}}</label>
+                                                    <input type="text" [attr.id]="'cert_asist_simposio_no_especialidad_modalidad' + i" class="form-control" formControlName="cert_asist_simposio_no_especialidad_modalidad">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'cert_asist_simposio_no_especialidad_ano' + i"> {{'Año'|translate}}</label>
+                                                    <input type="text" [attr.id]="'cert_asist_simposio_no_especialidad_ano' + i" class="form-control" formControlName="cert_asist_simposio_no_especialidad_ano">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'cert_asist_simposio_no_especialidad_institucion' + i"> {{'Institución que lo avala'|translate}}</label>
+                                                    <input type="text" [attr.id]="'cert_asist_simposio_no_especialidad_institucion' + i" class="form-control" formControlName="cert_asist_simposio_no_especialidad_institucion">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'cert_asist_simposio_no_especialidad_horas' + i"> {{'Horas crédito'|translate}}</label>
+                                                    <input type="text" [attr.id]="'cert_asist_simposio_no_especialidad_horas' + i" class="form-control" formControlName="cert_asist_simposio_no_especialidad_horas">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'cert_asist_simposio_no_especialidad_encalidade' + i"> {{'En calidad de'|translate}}</label>
+                                                    <input type="text" [attr.id]="'cert_asist_simposio_no_especialidad_encalidade' + i" class="form-control" formControlName="cert_asist_simposio_no_especialidad_encalidade">
+                                                </div>
+                                                <div class="form-group  col-xs-12 col-sm-4 camp">
+                                                    <img src="assets/images/pdf-icon.png" alt="" [attr.for]="'cert_asist_simposio_no_especialidad_pdf' + i">
+                                                    <angular-file-uploader [attr.id]="'cert_asist_simposio_no_especialidad_pdf' + i" class="form-control" formControlName="cert_asist_simposio_no_especialidad_pdf" [config]="reccertificadoConfig" (ApiResponse)="fileUpload($event)">
+                                                    </angular-file-uploader>
+
+                                                </div>
+
+                                                <div class="clear"></div>
+                                                <div class="col-md-2">
+                                                    <button class="btn btn-danger" (click)="removerPregunta4(i)">Remover</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="clear"></div>
+                        <br><br>
+                        <hr>
+                        <div class="form-group form-row">
+                            <div class="col-12">
+                                <input type="hidden" formControlName="id">
+                                <button type="submit" [disabled]="!recertificadoForm.valid" class="btn btn-outline-success">{{'Guardar'|translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>

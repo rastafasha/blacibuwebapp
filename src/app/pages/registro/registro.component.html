@@ -1,0 +1,127 @@
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<section id="wrapper" class="login-register login-sidebar animated fadeIn">
+    <div class="textintro">
+        <h1>BLACIBU</h1>
+        <h3>{{ 'Board latinoamericano de cirugía' | translate }}</h3>
+        <h3>{{ 'y traumatología bucomaxilofacial' | translate }}</h3>
+    </div>
+
+    <div class="login-box card">
+        <div class="card-body" style="overflow-y: scroll;">
+            <a routerLink="/" class="text-center db">
+                <img src="./assets/images/logo.jpg" alt="Home" style="width: 25%;" /><br/>
+                <h3>BLACIBU</h3>
+            </a>
+            <h3 *ngIf="status != 'success'" class="box-title m-t-2 m-b-0">Registro</h3>
+            <div class="d-block mt-3 text-success" *ngIf="status == 'success'">
+                {{ 'El registro se ha completado correctamente,' | translate }} <a [routerLink]="['/login']">Ingresar aqui</a>
+            </div>
+
+            <div class="d-block mt-3 text-danger" *ngIf="status == 'error'">
+                {{ 'El registro no se ha completado correctamente, vuelve a intentarlo más tarde.' | translate }}
+            </div>
+            <form class="form-horizontal form-material" id="loginform" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+
+
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="user.name" required placeholder="Nombres">
+                        <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+                      {{ 'El nombre no es válido' | translate }}
+                  </small>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input type="text" name="surname" class="form-control" #surname="ngModel" [(ngModel)]="user.surname" required placeholder="Apellidos">
+                        <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+                    {{ 'El Apellido no es válido' | translate }}
+                </small>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input type="text" name="email" class="form-control" #email="ngModel" [(ngModel)]="user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Correo electrónico">
+                        <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">
+                    {{ 'El email no es válido' | translate }}
+                </small>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input type="password" name="password" class="form-control" #password="ngModel" [(ngModel)]="user.password" required placeholder="Contraseña">
+                        <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">
+                        {{ 'La contraseña no es válida' | translate }}
+                    </small>
+                        <div *ngIf="password.errors?.minlength">
+                            {{ 'La contraseña debes tener minimo 5 caracteres.' | translate }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label>{{ 'Tipo de registro' | translate }}</label>
+                        <select name="tiporegistro_id" #tiporegistro="ngModel" [(ngModel)]="user.tiporegistro_id" class="form-control">
+                        <option *ngFor="let tiporegistro of tiporegistros | slice:0:2" value="{{tiporegistro.id}}">
+                          {{tiporegistro.name}}
+                        </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label>{{ 'Idioma' | translate }}</label>
+                        <select class="form-control form-control-line" name="idioma" #idioma="ngModel" [(ngModel)]="user.idioma">
+                                <option value="">{{ 'Seleccione' | translate }}</option>
+                                <option value="es" >Español</option>
+                                <option value="pt" >Português</option>
+                            </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label>{{ 'País' | translate }}</label>
+                        <select class="form-control form-control-line" name="pais" #idioma="ngModel" [(ngModel)]="user.pais">
+                            <optgroup label="País">
+                                <option value="">{{ 'Seleccione' | translate }}</option>
+                                <option value="Argentina ">Argentina</option>
+                            <option value="Bolivia ">Bolivia</option>
+                            <option value="Brasil ">Brasil</option>
+                            <option value="Chile ">Chile</option>
+                            <option value="Colombia ">Colombia</option>
+                            <option value="Cuba ">Cuba</option>
+                            <option value="Ecuador ">Ecuador</option>
+                            <option value="El Salvador ">El Salvador</option>
+                            <option value="Guatemala ">Guatemala</option>
+                            <option value="Haiti ">Haiti</option>
+                            <option value="Honduras ">Honduras</option>
+                            <option value="México ">México</option>
+                            <option value="Nicaragua ">Nicaragua</option>
+                            <option value="Panama ">Panama</option>
+                            <option value="Paraguay ">Paraguay</option>
+                            <option value="Perú ">Perú</option>
+                            <option value="Uruguay ">Uruguay</option>
+                            <option value="Venezuela ">Venezuela</option>
+                            </optgroup>
+                            </select>
+                    </div>
+                </div>
+                <div class="form-group text-center m-t-1">
+                    <div class="col-xs-12">
+                        <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light btn-rounded" type="submit" [disabled]="registerForm.invalid">{{ 'Registrarme' | translate }}</button>
+                    </div>
+                </div>
+                <div class="form-group m-b-0">
+                    <div class="col-sm-12 text-center">
+                        <p>{{ '¿Posee una cuenta?' | translate }} <a routerLink="/" class="text-info m-l-5"><b>{{ 'Ingresar' | translate }}</b></a></p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->

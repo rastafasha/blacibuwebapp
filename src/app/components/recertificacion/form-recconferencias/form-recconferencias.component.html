@@ -1,0 +1,275 @@
+<div class="row">
+    <div class="col-12 animated fadeInUp">
+        <div class="card card-padd">
+            <div class="card-body blog-form">
+                <form [formGroup]="reconferenciaForm" (ngSubmit)="onSubmit(reconferenciaForm)" class="form-horizontal form-material">
+                    <div class="row">
+
+                        <h2 class="col-12"> {{'Conferencias y Afiliaciones'|translate}}</h2><br><br>
+                        <!---group 0-->
+                        <div class="row card-padd">
+                            <h4 class="col-12">{{'Conferencias nacionales e internacionales'|translate}} <i class="fa fa-info" data-toggle="tooltip" data-placement="top" data-original-title="Ordenados por fecha comenzando por la más reciente."></i></h4>
+
+                            <div class="clear"></div><br><br>
+                            <div class="row">
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label> {{'Título de la conferencia'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="conf_nac_inter_titulo">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Evento en el que fue presentado'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="conf_nac_inter_evento">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <img src="assets/images/pdf-icon.png" alt="">
+                                    <angular-file-uploader class="form-control" [config]="recconferenciaConfig" (ApiResponse)="fileUpload($event)">
+                                    </angular-file-uploader>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-outline-success" (click)="agregarPregunta()">Agregar Pregunta</a>
+                            </div>
+                            <div [formGroup]="reconferenciaForm">
+                                <div formArrayName="preguntas">
+                                    <div *ngFor="let pregunta of preguntas.controls; let i = index">
+                                        <div [formGroupName]="i">
+                                            <div class="form-group row">
+
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'conf_nac_inter_titulo' + i"> {{'Título de la conferencia'|translate}}</label>
+                                                    <input type="text" [attr.id]="'conf_nac_inter_titulo' + i" class="form-control" formControlName="conf_nac_inter_titulo">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'conf_nac_inter_evento' + i"> {{'Evento en el que fue presentado'|translate}}</label>
+                                                    <input type="text" [attr.id]="'conf_nac_inter_evento' + i" class="form-control" formControlName="conf_nac_inter_evento">
+                                                </div>
+                                                <div class="form-group  col-xs-12 col-sm-4 camp">
+                                                    <img src="assets/images/pdf-icon.png" alt="" [attr.for]="'conf_nac_inter_pdf' + i">
+                                                    <angular-file-uploader [attr.id]="'conf_nac_inter_pdf' + i" class="form-control" formControlName="conf_nac_inter_pdf" [config]="recconferenciaConfig" (ApiResponse)="fileUpload($event)">
+                                                    </angular-file-uploader>
+
+                                                </div>
+
+                                                <div class="clear"></div>
+                                                <div class="col-md-2">
+                                                    <button class="btn btn-danger" (click)="removerPregunta(i)">Remover</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!---group 2-->
+                        <div class="row card-padd">
+                            <h4 class="col-12">{{'Conferencias nacionales e internacionales presentadas en CIALACIBU'|translate}} <i class="fa fa-info" data-toggle="tooltip" data-placement="top" data-original-title="Ordenados por fecha comenzando por la más reciente."></i></h4>
+
+                            <div class="clear"></div><br><br>
+                            <div class="row">
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label> {{'Título de la conferencia'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="conf_nac_inter_cialacibu_titulo">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Evento en el que fue presentado'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="conf_nac_inter_cialacibu_evento">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <img src="assets/images/pdf-icon.png" alt="">
+                                    <angular-file-uploader class="form-control" [config]="recconferenciaConfig" (ApiResponse)="fileUpload($event)">
+                                    </angular-file-uploader>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-outline-success" (click)="agregarPregunta2()">Agregar Pregunta</a>
+                            </div>
+                            <div [formGroup]="reconferenciaForm">
+                                <div formArrayName="preguntas2">
+                                    <div *ngFor="let pregunta2 of preguntas2.controls; let i = index">
+                                        <div [formGroupName]="i">
+                                            <div class="form-group row">
+
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'conf_nac_inter_cialacibu_titulo' + i"> {{'Título de la conferencia'|translate}}</label>
+                                                    <input type="text" [attr.id]="'conf_nac_inter_cialacibu_titulo' + i" class="form-control" formControlName="conf_nac_inter_cialacibu_titulo">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'conf_nac_inter_cialacibu_evento' + i"> {{'Evento en el que fue presentado'|translate}}</label>
+                                                    <input type="text" [attr.id]="'conf_nac_inter_cialacibu_evento' + i" class="form-control" formControlName="conf_nac_inter_cialacibu_evento">
+                                                </div>
+                                                <div class="form-group  col-xs-12 col-sm-4 camp">
+                                                    <img src="assets/images/pdf-icon.png" alt="" [attr.for]="'conf_nac_inter_cialacibu_pdf' + i">
+                                                    <angular-file-uploader [attr.id]="'conf_nac_inter_cialacibu_pdf' + i" class="form-control" [config]="recconferenciaConfig" (ApiResponse)="fileUpload($event)">
+                                                    </angular-file-uploader>
+
+                                                </div>
+
+                                                <div class="clear"></div>
+                                                <div class="col-md-2">
+                                                    <button class="btn btn-danger" (click)="removerPregunta2(i)">Remover</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!---group 3-->
+                        <div class="row card-padd">
+                            <h4 class="col-12">{{'Afiliación a asociaciones odontológicas de la especialidad nacionales y en el extranjero'|translate}} <i class="fa fa-info" data-toggle="tooltip" data-placement="top" data-original-title="Ordenados por fecha comenzando por la más reciente."></i></h4>
+
+                            <div class="clear"></div><br><br>
+                            <div class="row">
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label> {{'Nombre de la asociación'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="afilia_asosc_odont_nac_extran_nombre">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Cargo desempeñado'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="afilia_asosc_odont_nac_extran_cargo">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Categoría'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="afilia_asosc_odont_nac_extran_categoria">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Gremio'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="afilia_asosc_odont_nac_extran_gremio">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <img src="assets/images/pdf-icon.png" alt="">
+                                    <angular-file-uploader class="form-control" [config]="recconferenciaConfig" (ApiResponse)="fileUpload($event)">
+                                    </angular-file-uploader>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-outline-success" (click)="agregarPregunta3()">Agregar Pregunta</a>
+                            </div>
+                            <div [formGroup]="reconferenciaForm">
+                                <div formArrayName="preguntas3">
+                                    <div *ngFor="let pregunta3 of preguntas3.controls; let i = index">
+                                        <div [formGroupName]="i">
+                                            <div class="form-group row">
+
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'afilia_asosc_odont_nac_extran_nombre' + i"> {{'Nombre de la asociación'|translate}}</label>
+                                                    <input type="text" [attr.id]="'afilia_asosc_odont_nac_extran_nombre' + i" class="form-control" formControlName="afilia_asosc_odont_nac_extran_nombre">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'afilia_asosc_odont_nac_extran_cargo' + i"> {{'Cargo desempeñado'|translate}}</label>
+                                                    <input type="text" [attr.id]="'afilia_asosc_odont_nac_extran_cargo' + i" class="form-control" formControlName="afilia_asosc_odont_nac_extran_cargo">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'afilia_asosc_odont_nac_extran_categoria' + i"> {{'Categoría'|translate}}</label>
+                                                    <input type="text" [attr.id]="'afilia_asosc_odont_nac_extran_categoria' + i" class="form-control" formControlName="afilia_asosc_odont_nac_extran_categoria">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'afilia_asosc_odont_nac_extran_gremio' + i"> {{'Gremio'|translate}}</label>
+                                                    <input type="text" [attr.id]="'afilia_asosc_odont_nac_extran_gremio' + i" class="form-control" formControlName="afilia_asosc_odont_nac_extran_gremio">
+                                                </div>
+                                                <div class="form-group  col-xs-12 col-sm-4 camp">
+                                                    <img src="assets/images/pdf-icon.png" alt="" [attr.for]="'afilia_asosc_odont_nac_extran_pdf' + i">
+                                                    <angular-file-uploader [attr.id]="'afilia_asosc_odont_nac_extran_pdf' + i" class="form-control" [config]="recconferenciaConfig" (ApiResponse)="fileUpload($event)">
+                                                    </angular-file-uploader>
+
+                                                </div>
+
+                                                <div class="clear"></div>
+                                                <div class="col-md-2">
+                                                    <button class="btn btn-danger" (click)="removerPregunta3(i)">Remover</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!---group 4-->
+                        <div class="row card-padd">
+                            <h4 class="col-12">{{'Colaboraciones académicas realizadas para el BLACIBU'|translate}} <i class="fa fa-info" data-toggle="tooltip" data-placement="top" data-original-title="Ordenados por fecha comenzando por la más reciente."></i></h4>
+
+                            <div class="clear"></div><br><br>
+                            <div class="row">
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label> {{'Figura'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="colaboracion_acade_para_blacibu_figura">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Año'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="colaboracion_acade_para_blacibu_ano">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Función ejecutada'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="colaboracion_acade_para_blacibu_funcion">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <img src="assets/images/pdf-icon.png" alt="">
+                                    <angular-file-uploader class="form-control" [config]="recconferenciaConfig" (ApiResponse)="fileUpload($event)">
+                                    </angular-file-uploader>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-outline-success" (click)="agregarPregunta4()">Agregar Pregunta</a>
+                            </div>
+                            <div [formGroup]="reconferenciaForm">
+                                <div formArrayName="preguntas4">
+                                    <div *ngFor="let pregunta4 of preguntas4.controls; let i = index">
+                                        <div [formGroupName]="i">
+                                            <div class="form-group row">
+
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'colaboracion_acade_para_blacibu_figura' + i"> {{'Figura'|translate}}</label>
+                                                    <input type="text" [attr.id]="'colaboracion_acade_para_blacibu_figura' + i" class="form-control" formControlName="colaboracion_acade_para_blacibu_figura">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'colaboracion_acade_para_blacibu_ano' + i"> {{'Año'|translate}}</label>
+                                                    <input type="text" [attr.id]="'colaboracion_acade_para_blacibu_ano' + i" class="form-control" formControlName="colaboracion_acade_para_blacibu_ano">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'colaboracion_acade_para_blacibu_funcion' + i"> {{'Función ejecutada'|translate}}</label>
+                                                    <input type="text" [attr.id]="'colaboracion_acade_para_blacibu_funcion' + i" class="form-control" formControlName="colaboracion_acade_para_blacibu_funcion">
+                                                </div>
+                                                <div class="form-group  col-xs-12 col-sm-4 camp">
+                                                    <img src="assets/images/pdf-icon.png" alt="" [attr.for]="'colaboracion_acade_para_blacibu_pdf' + i">
+                                                    <angular-file-uploader [attr.id]="'colaboracion_acade_para_blacibu_pdf' + i" class="form-control" [config]="recconferenciaConfig" (ApiResponse)="fileUpload($event)">
+                                                    </angular-file-uploader>
+
+                                                </div>
+
+                                                <div class="clear"></div>
+                                                <div class="col-md-2">
+                                                    <button class="btn btn-danger" (click)="removerPregunta4(i)">Remover</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clear"></div>
+
+                        <div class="form-group form-row">
+                            <div class="col-12">
+                                <input type="hidden" name="id">
+                                <button type="submit" [disabled]="!reconferenciaForm.valid" class="btn btn-outline-success">{{'Guardar'|translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>

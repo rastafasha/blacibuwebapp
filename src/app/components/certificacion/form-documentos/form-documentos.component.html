@@ -1,0 +1,91 @@
+<div class="row">
+    <div class="col-12 animated fadeInUp">
+        <div class="card card-padd">
+            <div class="card-body blog-form">
+                <form [formGroup]="documentosForm" (ngSubmit)="onSubmit(documentosForm)" class="form-horizontal form-material">
+                    <div class="row">
+                        <h2 class="col-12"> {{'Documentos profesionales' | translate}}</h2><br><br>
+
+                        <div class="col-12 col-sm-4">
+                            <h4 class="col-12">{{'Título universitario de odontólogo'|translate}} <i class="fa fa-info" data-toggle="tooltip" data-placement="top" data-original-title="(Cirugía oral y maxilofacial, o equivalente en su país)"></i> </h4>
+
+                            <div class="form-group camp  cajita">
+                                <img src="./assets/images/pdf-icon.png" alt="">
+                                <p>{{'Nombre del archivo' | translate}}: <b>{{documentos.pdf_titulo_odontologo}}</b> </p>
+                                <angular-file-uploader [config]="afuConfig1" (ApiResponse)="documentoUpload($event)">
+                                </angular-file-uploader>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-4">
+                            <h4 class="col-12">{{'Cédula, matrícula o colegiatura oficial de odontólogo'|translate}} <i class="fa fa-info" data-toggle="tooltip" data-placement="top" data-original-title="(Cirugía oral y maxilofacial, o equivalente en su país)"></i></h4>
+                            <div class="clear"></div>
+                            <div class="form-group camp cajita">
+                                <img src="./assets/images/pdf-icon.png" alt="">
+                                <p>{{'Nombre del archivo' | translate}}: <b>{{documentos.pdf_matricula_odontologo}}</b> </p>
+                                <angular-file-uploader [config]="afuConfig2" (ApiResponse)="documentoUpload($event)">
+                                </angular-file-uploader>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <h4 class="col-12">{{'Título de especialista en cirugía bucomaxilofacial'|translate}} <i class="fa fa-info" data-toggle="tooltip" data-placement="top" data-original-title="(Cirugía oral y maxilofacial, o equivalente en su país)"></i></h4>
+                            <div class="clear"></div>
+                            <div class="form-group camp cajita">
+                                <img src="./assets/images/pdf-icon.png" alt="">
+                                <p>{{'Nombre del archivo' | translate}}: <b>{{documentos.pdf_titulo_espec_bucomax}}</b> </p>
+                                <angular-file-uploader [config]="afuConfig3" (ApiResponse)="documentoUpload($event)">
+                                </angular-file-uploader>
+
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <h4 class="col-12">{{'Cédula o matrícula oficial en cirugía bucomaxilofacial'|translate}} <i class="fa fa-info" data-toggle="tooltip" data-placement="top" data-original-title="(Cirugía oral y maxilofacial, o equivalente en su país), si aplica en su país de ejercicio."></i></h4>
+
+                            <div class="form-group camp cajita">
+                                <img src="./assets/images/pdf-icon.png" alt="">
+                                <p>{{'Nombre del archivo' | translate}}: <b>{{documentos.pdf_matricula_bucomax}}</b> </p>
+                                <angular-file-uploader [config]="afuConfig4" (ApiResponse)="documentoUpload($event)">
+                                </angular-file-uploader>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xs-12 col-sm-4">
+                            <h4 class="col-12">{{'Constancia de haber realizado una residencia de especialización'|translate}} <i class="fa fa-info" data-toggle="tooltip" data-placement="top" data-original-title="Con dedicación a tiempo completo, no menor a 3 años de duración."></i></h4>
+
+                            <div class="form-group camp cajita">
+                                <img src="./assets/images/pdf-icon.png" alt="">
+                                <p>{{'Nombre del archivo' | translate}}: <b>{{documentos.pdf_residencia_especializacion}}</b> </p>
+                                <angular-file-uploader [config]="afuConfig5" (ApiResponse)="documentoUpload($event)">
+                                </angular-file-uploader>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xs-12 col-sm-4">
+                            <h4 class="col-12">{{'Constancia de miembro activo de su sociedad o asociación'|translate}} </h4>
+
+                            <div class="form-group camp cajita">
+                                <img src="./assets/images/pdf-icon.png" alt="">
+                                <p>{{'Nombre del archivo' | translate}}: <b>{{documentos.pdf_constancia_miembro}}</b> </p>
+                                <angular-file-uploader [config]="afuConfig6" (ApiResponse)="documentoUpload($event)">
+                                </angular-file-uploader>
+                            </div>
+                        </div>
+
+                        <div class="clear"></div>
+                        <br><br>
+                        <div class="form-group form-row">
+                            <div class="col-12">
+                                <input type="hidden" formControlName="id">
+                                <button type="submit" [disabled]="!documentosForm.valid" class="btn btn-outline-success">{{'Guardar'|translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>

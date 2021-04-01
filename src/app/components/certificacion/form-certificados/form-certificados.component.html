@@ -1,0 +1,240 @@
+<div class="row">
+    <div class="col-12 animated fadeInUp">
+        <div class="card card-padd">
+            <div class="card-body blog-form">
+                <form [formGroup]="certificadoForm" (ngSubmit)="onSubmit(certificadoForm)" class="form-horizontal form-material">
+                    <div class="row">
+                        <h2 class="col-12"> {{'Certificados' | translate}}</h2><br><br>
+                        <!--- p1 -->
+                        <div class="row card-padd">
+                            <h4 class="col-12">{{'Certificados de asistencia cursos y congresos afines a la especialidad avalados por Alacibu.'|translate}} <i class="fa fa-info" data-toggle="tooltip" data-placement="top" data-original-title="Ordenados por fecha comenzando por la más reciente."></i></h4>
+
+                            <div class="clear"></div><br><br>
+                            <div class="row">
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label> {{'Nombre del evento'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="cert_asist_avalados_nombre">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Año'|translate}} </label>
+                                    <input type="text" class="form-control" formControlName="cert_asist_avalados_ano">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Otras instituciones que lo avalan'|translate}} </label>
+                                    <input type="text" class="form-control" formControlName="cert_asist_avalados_otrasinst">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                    <label>{{'Horas crédito'|translate}} </label>
+                                    <input type="text" class="form-control" formControlName="cert_asist_avalados_horas">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                    <img src="assets/images/pdf-icon.png" alt="">
+                                    <angular-file-uploader class="form-control" [config]="certificadoConfig" (ApiResponse)="fileUpload($event)">
+                                    </angular-file-uploader>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-outline-success" (click)="agregarPregunta()">Agregar Pregunta</a>
+                            </div>
+                            <div [formGroup]="certificadoForm">
+                                <div formArrayName="preguntas">
+                                    <div *ngFor="let pregunta of preguntas.controls; let i = index">
+                                        <div [formGroupName]="i">
+                                            <div class="form-group row">
+
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'cert_asist_avalados_nombre' + i"> {{'Nombre del evento'|translate}}</label>
+                                                    <input type="text" [attr.id]="'cert_asist_avalados_nombre' + i" class="form-control" formControlName="cert_asist_avalados_nombre">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'cert_asist_avalados_ano' + i"> {{'Año'|translate}}</label>
+                                                    <input type="text" [attr.id]="'cert_asist_avalados_ano' + i" class="form-control" formControlName="cert_asist_avalados_ano">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'cert_asist_avalados_otrasinst' + i"> {{'Otras instituciones que lo avalan'|translate}} </label>
+                                                    <input type="text" [attr.id]="'cert_asist_avalados_otrasinst' + i" class="form-control" formControlName="cert_asist_avalados_otrasinst">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                                    <label [attr.for]="'cert_asist_avalados_horas' + i">{{'Horas crédito'|translate}}</label>
+                                                    <input type="text" [attr.id]="'cert_asist_avalados_horas' + i" class="form-control" formControlName="cert_asist_avalados_horas">
+                                                </div>
+                                                <div class="form-group  col-xs-12 col-sm-6 camp">
+                                                    <img src="assets/images/pdf-icon.png" alt="" [attr.for]="'cert_asist_avalados_pdf' + i">
+                                                    <angular-file-uploader [attr.id]="'cert_asist_avalados_pdf' + i" class="form-control" [config]="certificadoConfig" (ApiResponse)="fileUpload($event)">
+                                                    </angular-file-uploader>
+
+                                                </div>
+
+                                                <div class="clear"></div>
+                                                <div class="col-md-2">
+                                                    <button class="btn btn-danger" (click)="removerPregunta(i)">Remover</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--- p1 -->
+                        <div class="row card-padd">
+                            <h4 class="col-12">{{'Certificados de asistencia cursos y congresos afines a la especialidad no avalados por Alacibu.'|translate}} <i class="fa fa-info" data-toggle="tooltip" data-placement="top" data-original-title="Ordenados por fecha comenzando por la más reciente."></i></h4>
+
+                            <div class="clear"></div><br><br>
+                            <div class="row">
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label> {{'Nombre del evento'|translate}}</label>
+                                    <input type="text" class="form-control" formControlName="cert_asist_no_avalados_nombre">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Año'|translate}} </label>
+                                    <input type="text" class="form-control" formControlName="cert_asist_no_avalados_ano">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Otras instituciones que lo avalan'|translate}} </label>
+                                    <input type="text" class="form-control" formControlName="cert_asist_no_avalados_otrasinst">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                    <label>{{'Horas crédito'|translate}} </label>
+                                    <input type="text" class="form-control" formControlName="cert_asist_no_avalados_horas">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                    <img src="assets/images/pdf-icon.png" alt="">
+                                    <angular-file-uploader class="form-control" [config]="certificadoConfig" (ApiResponse)="fileUpload($event)">
+                                    </angular-file-uploader>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-outline-success" (click)="agregarPregunta1()">Agregar Pregunta</a>
+                            </div>
+                            <div [formGroup]="certificadoForm">
+                                <div formArrayName="preguntas1">
+                                    <div *ngFor="let pregunta1 of preguntas1.controls; let i = index">
+                                        <div [formGroupName]="i">
+                                            <div class="form-group row">
+
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'cert_asist_no_avalados_nombre' + i"> {{'Nombre del evento'|translate}}</label>
+                                                    <input type="text" [attr.id]="'cert_asist_no_avalados_nombre' + i" class="form-control" formControlName="cert_asist_no_avalados_nombre">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'cert_asist_no_avalados_ano' + i"> {{'Año'|translate}}</label>
+                                                    <input type="text" [attr.id]="'cert_asist_no_avalados_ano' + i" class="form-control" formControlName="cert_asist_no_avalados_ano">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                                    <label [attr.for]="'cert_asist_no_avalados_otrasinst' + i"> {{'Otras instituciones que lo avalan'|translate}} </label>
+                                                    <input type="text" [attr.id]="'cert_asist_no_avalados_otrasinst' + i" class="form-control" formControlName="cert_asist_no_avalados_otrasinst">
+                                                </div>
+                                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                                    <label [attr.for]="'cert_asist_no_avalados_horas' + i">{{'Horas crédito'|translate}}</label>
+                                                    <input type="text" [attr.id]="'cert_asist_no_avalados_horas' + i" class="form-control" formControlName="cert_asist_no_avalados_horas">
+                                                </div>
+                                                <div class="form-group  col-xs-12 col-sm-6 camp">
+                                                    <img src="assets/images/pdf-icon.png" alt="" [attr.for]="'cert_asist_no_avalados_pdf' + i">
+                                                    <angular-file-uploader [attr.id]="'cert_asist_no_avalados_pdf' + i" class="form-control" [config]="certificadoConfig" (ApiResponse)="fileUpload($event)">
+                                                    </angular-file-uploader>
+
+                                                </div>
+
+                                                <div class="clear"></div>
+                                                <div class="col-md-2">
+                                                    <button class="btn btn-danger" (click)="removerPregunta1(i)">Remover</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clear"></div>
+                        <div class="rayita"></div>
+                        <!--- p2 -->
+                        <div class="row card-padd">
+                            <h4 class="col-12">{{'Certificados o diplomas de actividades académicas.'|translate}} </h4>
+                            <div class="clear"></div>
+                            <br><br><br>
+                            <div class="row">
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Nombre de la institución'|translate}}</label>
+                                    <input type="text" formControlName="cert_o_diploma_academico_nombre" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Cargo desempeñado'|translate}} </label>
+                                    <input type="text" formControlName="cert_o_diploma_academico_cargo" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Tiempo en años'|translate}} </label>
+                                    <input type="text" formControlName="cert_o_diploma_academico_tiempo" class="form-control">
+                                </div>
+
+                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                    <label>{{'Otras instituciones que lo avalan'|translate}}</label>
+                                    <input type="text" formControlName="cert_o_diploma_academico_otrasinst" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                    <img src="assets/images/pdf-icon.png" alt="">
+                                    <angular-file-uploader class="form-control" [config]="certificadoConfig" (ApiResponse)="fileUpload($event)">
+                                    </angular-file-uploader>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="clear"></div>
+                        <div class="rayita"></div>
+                        <!--- p3 -->
+                        <div class="row card-padd">
+                            <h4 class="col-12">{{'Certificados o diplomas de actividades asistenciales.'|translate}} </h4>
+                            <div class="clear"></div>
+                            <br><br><br>
+                            <div class="row">
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Nombre de la institución'|translate}}</label>
+                                    <input type="text" formControlName="cert_o_diploma_asistencial_nombre" class="form-control">
+                                </div>
+                                <div class=" form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Cargo desempeñado'|translate}} </label>
+                                    <input type="text" formControlName="cert_o_diploma_asistencial_cargo" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-4 ">
+                                    <label>{{'Tiempo en años'|translate}} </label>
+                                    <input type="text" formControlName="cert_o_diploma_asistencial_tiempo" class="form-control">
+                                </div>
+
+                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                    <label>{{'Otras instituciones que lo avalan'|translate}}</label>
+                                    <input type="text" formControlName="cert_o_diploma_asistencial_otrasinst" class="form-control">
+                                </div>
+                                <div class="form-group camp col-xs-12 col-sm-6 ">
+                                    <img src="assets/images/pdf-icon.png" alt="">
+                                    <angular-file-uploader class="form-control" [config]="certificadoConfig" (ApiResponse)="fileUpload($event)">
+                                    </angular-file-uploader>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="clear"></div>
+                    <br><br>
+                    <div class="form-group form-row">
+                        <div class="col-12">
+                            <button type="submit" [disabled]="!certificadoForm.valid" class="btn btn-outline-success">{{'Guardar'|translate}}</button>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-12 animated fadeInUp">
+        <div class="card card-padd">
+            <div class="card-body blog-form">
+                <form [formGroup]="constanciaForm" (ngSubmit)="onSubmit(constanciaForm)" class="form-horizontal form-material">
+                    <div class="row">
+                        <h2 class="col-12">{{'Constancias'|translate}}</h2><br><br>
+                        <div class="col-xs-12 col-sm-6">
+                            <h4>{{'Constancia de miembro activo expedida por la Sociedad, Asociación o Entidad Nacional de su país.'|translate}}
+                            </h4>
+                            <div class="form-group camp  cajita">
+                                <img src="./assets/images/pdf-icon.png" alt="">
+                                <p>{{'Nombre del archivo' | translate}}: <b>{{recertconstancias.const_miembro_activo_pdf}}</b> </p>
+                                <angular-file-uploader [config]="afuConfig1" (ApiResponse)="documentoUpload($event)">
+                                </angular-file-uploader>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6">
+                            <h4>{{'Curriculum vitae (antecedentes últimos 6 años)'|translate}}</h4>
+                            <div class="clear"></div>
+                            <div class="form-group camp  cajita">
+                                <img src="./assets/images/pdf-icon.png" alt="">
+                                <p>{{'Nombre del archivo' | translate}}: <b>{{recertconstancias.curriculum_pdf}}</b> </p>
+                                <angular-file-uploader [config]="afuConfig2" (ApiResponse)="documentoUpload($event)">
+                                </angular-file-uploader>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6">
+                            <h4>{{'Constancia de práctica privada exclusiva de la especialidad representada en número de años'|translate}}</h4>
+                            <div class="clear"></div>
+
+
+                            <div class="form-group camp  cajita">
+                                <img src="./assets/images/pdf-icon.png" alt="">
+                                <p>{{'Nombre del archivo' | translate}}: <b>{{recertconstancias.const_practica_privada_pdf}}</b> </p>
+                                <angular-file-uploader [config]="afuConfig3" (ApiResponse)="documentoUpload($event)">
+                                </angular-file-uploader>
+                            </div>
+                            <div class="form-group camp col-xs-12 col-sm-6 ">
+                                <label> {{'Años'|translate}}</label>
+                                <input type="text" formControlName="const_anos" class="form-control">
+
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6">
+                            <h4>{{'Distinciones, premios y reconocimientos especiales en la especialidad'|translate}}</h4>
+                            <div class="clear"></div>
+                            <div class="form-group camp  cajita">
+                                <img src="./assets/images/pdf-icon.png" alt="">
+                                <p>{{'Nombre del archivo' | translate}}: <b>{{recertconstancias.distinciones_premios_pdf}}</b> </p>
+                                <angular-file-uploader [config]="afuConfig4" (ApiResponse)="documentoUpload($event)">
+                                </angular-file-uploader>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="form-group form-row">
+                            <div class="col-12">
+                                <input type="hidden" formControlName="id">
+                                <button type="submit" [disabled]="!constanciaForm.valid" class="btn btn-outline-success">{{'Guardar'|translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>

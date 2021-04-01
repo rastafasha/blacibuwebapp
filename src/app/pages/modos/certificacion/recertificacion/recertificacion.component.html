@@ -1,0 +1,49 @@
+<!-- Row -->
+<div *ngIf="identity && identity.tiporegistro_id == 2">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <h2 style="padding:20px ">Modo: {{'Recertificación'|translate}}</h2><br>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs profile-tab" role="tablist">
+                    <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#personal" role="tab"><i class="fa fa-address-card"></i> <p>{{'Información personal' | translate}}</p> </a> </li>
+                    <li class="nav-item"> <a class="nav-link " data-toggle="tab" href="#constancias" role="tab"><i class="fa fa-file" ></i> <p>{{'Constancias'|translate}}</p>  </a> </li>
+                    <li class="nav-item"> <a class="nav-link " data-toggle="tab" href="#certificados" role="tab"><i class="fa fa-certificate" ></i>  <p>{{'Certificados'|translate}}</p> </a> </li>
+                    <li class="nav-item"> <a class="nav-link " data-toggle="tab" href="#confere" role="tab"><i class="fa fa-microphone"></i>  <p>{{'Conferencias y Afiliaciones'|translate}}</p></a> </li>
+                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><i class="fa fa-user"></i> <p>{{'Perfil'|translate}}</p></a> </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="personal" role="tabpanel">
+                        <div class="card-body">
+                            <app-form-recdatospersonales></app-form-recdatospersonales>
+                        </div>
+                    </div>
+                    <div class="tab-pane " id="constancias" role="tabpanel">
+                        <div class="card-body">
+                            <app-form-recconstancias></app-form-recconstancias>
+                        </div>
+                    </div>
+                    <div class="tab-pane " id="certificados" role="tabpanel">
+                        <div class="card-body">
+                            <app-form-reccertificados></app-form-reccertificados>
+                        </div>
+                    </div>
+                    <div class="tab-pane " id="confere" role="tabpanel">
+                        <div class="card-body">
+                            <app-form-recconferencias></app-form-recconferencias>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="profile" role="tabpanel">
+                        <div class="card-body">
+                            <app-perfil-recertificacion></app-perfil-recertificacion>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Column -->
+    </div>
+</div>
+<!-- Row -->
